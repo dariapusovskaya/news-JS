@@ -1,7 +1,7 @@
 import './sources.css';
-import { NewsSource } from '../../../types';
+import { NewsSource, Drawable } from '../../../types';
 
-class Sources {
+class Sources implements Drawable<NewsSource> { // использую дженерик
     public draw(data: NewsSource[]): void { // void - метод ничего не возвращает
         // подготовка
         const fragment = document.createDocumentFragment();
