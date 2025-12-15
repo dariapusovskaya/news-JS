@@ -8,8 +8,11 @@
     "type-check": "tsc --noEmit",
     "lint": "eslint src/**/*.ts --ext .ts",
     "lint:fix": "eslint src/**/*.ts --ext .ts --fix",
-    "prebuild": "npm run type-check && npm run lint"
+    "prebuild": "npm run type-check && npm run lint",
+     "predeploy": "npm run build",
+     "deploy": "gh-pages -d dist"
   },
+  "homepage": "https://dariapusovskaya.github.io/news-js/",
   "devDependencies": {
     "@types/node": "^20.11.0",
     "@typescript-eslint/eslint-plugin": "6.13.0",
@@ -19,6 +22,7 @@
     "dotenv-webpack": "^8.0.1",
     "eslint": "^8.57.0",
     "eslint-plugin-import": "^2.29.1",
+    "gh-pages": "^6.3.0",
     "html-webpack-plugin": "^5.5.3",
     "style-loader": "^3.3.3",
     "ts-loader": "^9.5.1",
