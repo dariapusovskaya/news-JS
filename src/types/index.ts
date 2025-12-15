@@ -42,7 +42,9 @@ export interface Drawable<T> {
 // Enums (требование задания)
 export enum Endpoint {
     EVERYTHING = 'everything',
-    SOURCES = 'sources'
+    SOURCES = 'sources',
+    MOCK_EVERYTHING = 'mocks/everything',
+    MOCK_SOURCES = 'mocks/sources'
 }
 
 export enum HttpMethod {
@@ -84,7 +86,7 @@ export type NewsData = NewsArticle[] | NewsApiResponse;
 export type SourcesData = NewsSource[] | SourcesApiResponse;
 
 // Для совместимости со старым кодом
-export interface Component extends Drawable<any> {} // Временно, потом убрать !!
+export interface Component extends Drawable<unknown> {}
 
 export interface Controller {
     getSources(callback: (data: NewsSource[]) => void): void;
@@ -116,7 +118,7 @@ export interface LoaderOptions {
 // для базового Loader
 export interface ILoader {
     // есть в Loader классе
-    getResp<T>(params: any, callback: (data: T) => void): void;
+    getResp<T>(params: GetRespParams, callback: LoaderCallback<T>): void;
 }
 
 // Тип для параметров getResp
@@ -127,3 +129,7 @@ export interface GetRespParams {
 
 // Generic callback тип
 export type LoaderCallback<T> = (data: T) => void;
+
+// Callback типы для контроллера
+export type SourcesCallback = (data: NewsSource[]) => void;
+export type NewsCallback = (data: NewsArticle[]) => void;

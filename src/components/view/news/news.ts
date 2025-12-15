@@ -2,53 +2,37 @@ import './news.css';
 import { NewsArticle } from '../../../types';
 
 class News {
-    // мтод draw принимает типизированный параметр
-    public draw(data: NewsArticle[]): void { // : void - этот метод ничего не возвращает
-        // фильтруем данные (первые 10 новостей если их много)
+    public draw(data: NewsArticle[]): void {
         const news = data.length >= 10 ? data.filter((_item, idx) => idx < 10) : data;
-
-        // DocumentFragment для вставки DOM
         const fragment = document.createDocumentFragment();
-        
-        //шаблон новости в HTML
         const newsItemTemp = document.querySelector('#newsItemTemp') as HTMLTemplateElement;
         
-        // проверка: если шаблон не найден, выходим
         if (!newsItemTemp) {
             console.error('Template #newsItemTemp not found');
             return;
         }
 
-        // цикл по каждой новости
         news.forEach((item: NewsArticle, idx: number) => {
-            // клонируем шаблон
             const newsClone = newsItemTemp.content.cloneNode(true) as DocumentFragment;
-            
-            // находим элемент новости
             const newsItemElement = newsClone.querySelector('.news__item') as HTMLElement;
             
-            // добавляем класс 'alt' для каждой 2й новости
             if (newsItemElement && idx % 2) {
                 newsItemElement.classList.add('alt');
             }
 
-            // заполнение данных с проверкой типов
-
-            // 1. фото новости (может быть undefined, поэтому используем fallback)
+            // 1. фото новости - используем ТОЛЬКО placeholder для избежания 404 ошибок
             const metaPhoto = newsClone.querySelector('.news__meta-photo') as HTMLElement;
             if (metaPhoto) {
-                metaPhoto.style.backgroundImage = `url(${
-                    item.urlToImage || 'img/news_placeholder.jpg'
-                })`;
+                metaPhoto.style.backgroundColor = '#4a6fa5';
             }
 
-            // 2. автор (может быть undefined, поэтому fallback на source.name)
+            // 2. автор
             const metaAuthor = newsClone.querySelector('.news__meta-author');
             if (metaAuthor) {
                 metaAuthor.textContent = item.author || item.source.name;
             }
 
-            // 3. дата публикации (преобразуем формат)
+            // 3. дата публикации
             const metaDate = newsClone.querySelector('.news__meta-date');
             if (metaDate && item.publishedAt) {
                 metaDate.textContent = item.publishedAt
@@ -82,14 +66,11 @@ class News {
                 readMoreLink.setAttribute('href', item.url);
             }
 
-            // дбавляем клонированную новость в фрагмент
             fragment.append(newsClone);
         });
 
-        // находим контейнер для новостей
         const newsContainer = document.querySelector('.news');
         if (newsContainer) {
-            // очищаем и добавляем новые новости
             newsContainer.innerHTML = '';
             newsContainer.appendChild(fragment);
         } else {
