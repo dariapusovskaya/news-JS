@@ -22,7 +22,7 @@ export interface NewsSource {
     country?: string;
 }
 
-// Типы для API ответов
+
 export interface NewsApiResponse {
     status: 'ok' | 'error';
     totalResults: number;
@@ -34,12 +34,11 @@ export interface SourcesApiResponse {
     sources: NewsSource[];
 }
 
-// Generic интерфейс для компонентов
 export interface Drawable<T> {
     draw(data: T[]): void;
 }
 
-// Enums (требование задания)
+
 export enum Endpoint {
     EVERYTHING = 'everything',
     SOURCES = 'sources',
@@ -69,23 +68,22 @@ export enum NewsCategory {
     TECHNOLOGY = 'technology'
 }
 
-// Utility Types (требование задания)
+
 export type PartialArticle = Partial<NewsArticle>;
 export type ArticlePreview = Pick<NewsArticle, 'title' | 'description' | 'url' | 'urlToImage'>;
 export type ReadonlySource = Readonly<NewsSource>;
 
-// Generic для API ответов
 export type ApiResponse<T> = {
     status: Status;
     data?: T;
     message?: string;
 };
 
-// Union Types для данных
+
 export type NewsData = NewsArticle[] | NewsApiResponse;
 export type SourcesData = NewsSource[] | SourcesApiResponse;
 
-// Для совместимости со старым кодом
+
 export interface Component extends Drawable<unknown> {}
 
 export interface Controller {
@@ -109,27 +107,24 @@ export interface ProcessEnv {
     API_KEY?: string;
 }
 
-// для конфигурации Loader
+
 export interface LoaderOptions {
     apiKey: string;
     [key: string]: string;
 }
 
-// для базового Loader
 export interface ILoader {
-    // есть в Loader классе
+
     getResp<T>(params: GetRespParams, callback: LoaderCallback<T>): void;
 }
 
-// Тип для параметров getResp
 export interface GetRespParams {
     endpoint: Endpoint;
     options?: Record<string, string>;
 }
 
-// Generic callback тип
 export type LoaderCallback<T> = (data: T) => void;
 
-// Callback типы для контроллера
+
 export type SourcesCallback = (data: NewsSource[]) => void;
 export type NewsCallback = (data: NewsArticle[]) => void;
