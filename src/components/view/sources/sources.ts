@@ -1,9 +1,9 @@
 import './sources.css';
 import { NewsSource, Drawable } from '../../../types';
 
-class Sources implements Drawable<NewsSource> { // использую дженерик
-    public draw(data: NewsSource[]): void { // void - метод ничего не возвращает
-        // подготовка
+class Sources implements Drawable<NewsSource> {
+    public draw(data: NewsSource[]): void {
+
         const fragment = document.createDocumentFragment();
         const sourceItemTemp = document.querySelector('#sourceItemTemp') as HTMLTemplateElement;
 
@@ -11,11 +11,11 @@ class Sources implements Drawable<NewsSource> { // использую джене
             console.error('Template #sourceItemTemp not found');
             return;
         }
-// создаем элементы и добавляем во fragment
+
         data.forEach((item: NewsSource) => {
             const sourceClone = sourceItemTemp.content.cloneNode(true) as DocumentFragment;
             
-            // наполняем sourceClone
+
             const nameElement = sourceClone.querySelector('.source__item-name');
             if (nameElement) {
                 nameElement.textContent = item.name;
@@ -26,11 +26,9 @@ class Sources implements Drawable<NewsSource> { // использую джене
                 sourceItem.setAttribute('data-source-id', item.id);
             } 
 
-            // добавляем sourceClone во fragment
             fragment.append(sourceClone);
         });
 
-            // один раз добавляем fragment в DOM
             const sourcesContainer = document.querySelector('.sources');
             if (sourcesContainer) {
                 sourcesContainer.append(fragment);
