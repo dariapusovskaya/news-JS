@@ -20,19 +20,16 @@ class News {
                 newsItemElement.classList.add('alt');
             }
 
-            // 1. фото новости - используем ТОЛЬКО placeholder для избежания 404 ошибок
             const metaPhoto = newsClone.querySelector('.news__meta-photo') as HTMLElement;
             if (metaPhoto) {
-                metaPhoto.style.backgroundColor = '#4a6fa5';
+                metaPhoto.classList.add('.news__meta-photo-background')
             }
 
-            // 2. автор
             const metaAuthor = newsClone.querySelector('.news__meta-author');
             if (metaAuthor) {
                 metaAuthor.textContent = item.author || item.source.name;
             }
 
-            // 3. дата публикации
             const metaDate = newsClone.querySelector('.news__meta-date');
             if (metaDate && item.publishedAt) {
                 metaDate.textContent = item.publishedAt
@@ -42,25 +39,21 @@ class News {
                     .join('-');
             }
 
-            // 4. заголовок новости
             const titleElement = newsClone.querySelector('.news__description-title');
             if (titleElement) {
                 titleElement.textContent = item.title;
             }
 
-            // 5. источник новости
             const sourceElement = newsClone.querySelector('.news__description-source');
             if (sourceElement) {
                 sourceElement.textContent = item.source.name;
             }
 
-            // 6. описание новости
             const contentElement = newsClone.querySelector('.news__description-content');
             if (contentElement) {
                 contentElement.textContent = item.description;
             }
 
-            // 7. ссылка "Read more"
             const readMoreLink = newsClone.querySelector('.news__read-more a') as HTMLAnchorElement;
             if (readMoreLink) {
                 readMoreLink.setAttribute('href', item.url);
