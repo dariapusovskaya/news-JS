@@ -15,7 +15,6 @@ class Sources implements Drawable<NewsSource> {
         data.forEach((item: NewsSource) => {
             const sourceClone = sourceItemTemp.content.cloneNode(true) as DocumentFragment;
             
-
             const nameElement = sourceClone.querySelector('.source__item-name');
             if (nameElement) {
                 nameElement.textContent = item.name;

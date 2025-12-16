@@ -3,7 +3,8 @@ import {
     HttpMethod, 
     LoaderCallback, 
     LoaderOptions, 
-    GetRespParams 
+    GetRespParams, 
+    HttpStatus
 } from "../../types";
 
 class Loader {
@@ -17,7 +18,7 @@ class Loader {
 
     public getResp<T>(
         { endpoint, options = {} }: GetRespParams,
-        callback: LoaderCallback<T> = () => {
+        callback: LoaderCallback<T> = (): void => {
             console.error('No callback for GET response');
         }
     ): void {
@@ -26,7 +27,8 @@ class Loader {
 
     private errorHandler(res: Response): Response {
         if (!res.ok) {
-            if (res.status === 401 || res.status === 404) {
+            const status: HttpStatus = res.status;
+            if (status === HttpStatus.UNAUTHORIZED || status ===  HttpStatus.NOT_FOUND) {
                 console.log(`Sorry, but there is ${res.status} error: ${res.statusText}`);
             }
             throw new Error(res.statusText);

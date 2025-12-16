@@ -23,14 +23,16 @@ export interface NewsSource {
 }
 
 
+export type ApiStatus = 'ok' | 'error';
+
 export interface NewsApiResponse {
-    status: 'ok' | 'error';
+    status: ApiStatus;
     totalResults: number;
     articles: NewsArticle[];
 }
 
 export interface SourcesApiResponse {
-    status: 'ok' | 'error';
+    status: ApiStatus;
     sources: NewsSource[];
 }
 
@@ -53,6 +55,11 @@ export enum HttpMethod {
     DELETE = 'DELETE'
 }
 
+export enum HttpStatus {
+    UNAUTHORIZED = 401,
+    NOT_FOUND = 404,
+}
+
 export enum Status {
     OK = 'ok',
     ERROR = 'error'
@@ -69,10 +76,6 @@ export enum NewsCategory {
 }
 
 
-export type PartialArticle = Partial<NewsArticle>;
-export type ArticlePreview = Pick<NewsArticle, 'title' | 'description' | 'url' | 'urlToImage'>;
-export type ReadonlySource = Readonly<NewsSource>;
-
 export type ApiResponse<T> = {
     status: Status;
     data?: T;
@@ -83,8 +86,6 @@ export type ApiResponse<T> = {
 export type NewsData = NewsArticle[] | NewsApiResponse;
 export type SourcesData = NewsSource[] | SourcesApiResponse;
 
-
-export interface Component extends Drawable<unknown> {}
 
 export interface Controller {
     getSources(callback: (data: NewsSource[]) => void): void;
@@ -111,11 +112,6 @@ export interface ProcessEnv {
 export interface LoaderOptions {
     apiKey: string;
     [key: string]: string;
-}
-
-export interface ILoader {
-
-    getResp<T>(params: GetRespParams, callback: LoaderCallback<T>): void;
 }
 
 export interface GetRespParams {

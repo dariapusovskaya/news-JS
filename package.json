@@ -6,8 +6,8 @@
     "start": "webpack serve --mode development --open",
     "build": "webpack --mode production",
     "type-check": "tsc --noEmit",
-    "lint": "eslint src/**/*.ts --ext .ts",
-    "lint:fix": "eslint src/**/*.ts --ext .ts --fix",
+    "lint": "eslint src --ext .ts",
+    "lint:fix": "eslint src --ext .ts --fix",
     "prebuild": "npm run type-check && npm run lint",
      "predeploy": "npm run build",
      "deploy": "gh-pages -d dist"

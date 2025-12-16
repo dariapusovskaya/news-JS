@@ -3,15 +3,14 @@ import Sources from './sources/sources';
 import { NewsArticle, NewsSource, NewsApiResponse, SourcesApiResponse } from '../../types';
 
 export class AppView {
-
-    private news: News;  // тип: экземпляр класса news
-    private sources: Sources; // тип: экземпляр класса sources
+    private news: News;
+    private sources: Sources;
 
     constructor() {
         this.news = new News();
         this.sources = new Sources();
     }
-// data может быть либо респонс, либо артикл, void - так как метод ничего не возвращает
+
     drawNews(data: NewsApiResponse | NewsArticle[]): void {
         if ('articles' in data) {
             this.news.draw(data.articles);
