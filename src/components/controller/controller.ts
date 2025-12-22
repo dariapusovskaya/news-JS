@@ -5,7 +5,7 @@ class AppController extends AppLoader {
     public getSources(callback: SourcesCallback): void {
         super.getResp<{ sources: NewsSource[] }>(
             {
-                endpoint: Endpoint.MOCK_SOURCES,
+                endpoint: Endpoint.SOURCES,
             },
             (data) => callback(data.sources)
         );
@@ -23,7 +23,7 @@ class AppController extends AppLoader {
                     newsContainer.setAttribute('data-source', sourceId);
                     super.getResp<{ articles: NewsArticle[]}>(
                         {
-                            endpoint: Endpoint.MOCK_EVERYTHING,
+                            endpoint: Endpoint.EVERYTHING,
                             options: {
                                 sources: sourceId,
                             },

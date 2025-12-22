@@ -44,8 +44,6 @@ export interface Drawable<T> {
 export enum Endpoint {
     EVERYTHING = 'everything',
     SOURCES = 'sources',
-    MOCK_EVERYTHING = 'mocks/everything',
-    MOCK_SOURCES = 'mocks/sources'
 }
 
 export enum HttpMethod {
