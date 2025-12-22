@@ -1,34 +1,41 @@
+
 .sources {
     display: flex;
-    flex-wrap: nowrap;
-    width: 100%;
-    height: 120px;
-    overflow: auto;
-    align-items: center;
-    font: 300 1em 'Fira Sans', sans-serif;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 15px;
+    max-height: 400px;
+    overflow-y: auto;
+    background: #2a2b32;
+    border-radius: 8px;
 }
 
 .source__item {
-    background: none;
-    border: 2px solid #30c5ff;
-    font: inherit;
-    line-height: 1;
-    margin: 0.5em;
-    padding: 1em 2em;
-    color: #70d6ff;
-    transition: 0.25s;
+    background: #3a3b44;
+    border-radius: 5px;
+    padding: 12px 15px;
+    color: #fff;
+    font-size: 14px;
     cursor: pointer;
 }
 
-.source__item:hover,
-.source__item:focus {
-    border-color: #3fcc59;
-    color: #69db7e;
-    box-shadow: 0 0.5em 0.5em -0.4em #3fcc59;
-    transform: translateY(-0.25em);
+.source__item:hover {
+    background: #5ad67d;
 }
 
 .source__item-name {
-    font-weight: 400;
+    margin: 0;
     white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@media (max-width: 768px) {
+    .sources {
+        max-height: 300px;
+    }
+    
+    .source__item {
+        flex: 1 1 calc(50% - 10px);
+    }
 }
